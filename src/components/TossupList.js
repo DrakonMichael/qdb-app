@@ -17,7 +17,7 @@ export default function TossupList(props) {
 
         let search = props.params.searchQuery.length > 0 ? props.params.searchQuery : "QDBNOSEARCH"
         if(props.params.questionType[0] === 0) {
-            axios.get(`https://24.199.88.237:8080/api/tossups?type=quizdb&diffis=[${props.params.difficultyList.join(",")}]&subcats=[${props.params.subcategoryList.join(",")}]&limit=${props.params.num}&searchtype=${props.params.searchType[0]}&searchterm=${search}&tournaments=[${props.params.tournamentList.join(",")}]&random=${props.params.rand ? 1 : 0}`).then((res) => {
+            axios.get(`http://24.199.88.237:8080/api/tossups?type=quizdb&diffis=[${props.params.difficultyList.join(",")}]&subcats=[${props.params.subcategoryList.join(",")}]&limit=${props.params.num}&searchtype=${props.params.searchType[0]}&searchterm=${search}&tournaments=[${props.params.tournamentList.join(",")}]&random=${props.params.rand ? 1 : 0}`).then((res) => {
                 if(res.data.message === "success") {
                     setTossups(res.data.data)
                     setHaveTossups(true)
@@ -28,7 +28,7 @@ export default function TossupList(props) {
 
             })
         } else {
-            axios.get(`https://24.199.88.237:8080/api/bonuses?type=quizdb&diffis=[${props.params.difficultyList.join(",")}]&subcats=[${props.params.subcategoryList.join(",")}]&limit=${props.params.num}&searchtype=${props.params.searchType[0]}&searchterm=${search}&tournaments=[${props.params.tournamentList.join(",")}]&random=${props.params.rand ? 1 : 0}`).then((res) => {
+            axios.get(`http://24.199.88.237:8080/api/bonuses?type=quizdb&diffis=[${props.params.difficultyList.join(",")}]&subcats=[${props.params.subcategoryList.join(",")}]&limit=${props.params.num}&searchtype=${props.params.searchType[0]}&searchterm=${search}&tournaments=[${props.params.tournamentList.join(",")}]&random=${props.params.rand ? 1 : 0}`).then((res) => {
                 if(res.data.message === "success") {
                     setTossups(res.data.data)
                     setHaveTossups(true)
