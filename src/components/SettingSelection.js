@@ -7,7 +7,30 @@ import {
     SearchTypeSelector,
     SubcategorySelector, TournamentSelector
 } from "./DropdownSelectors";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+
+/**
+ * Hook that alerts clicks outside of the passed ref
+ */
+function useOutsideAlerter(buttonRef, listRef, func) {
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event) {
+      if (buttonRef.current && listRef.current && !listRef.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
+        func()
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [listRef, buttonRef, func]);
+}
+
 
 export default function SettingSelection(props) {
     const [categories, setCategories] = useState([])
@@ -17,6 +40,13 @@ export default function SettingSelection(props) {
     const [questionType, setQuestionType] = useState([])
     const [tournamentList, setTournamentList] = useState([])
     const [searchText, setSearchText] = useState("")
+
+    const [dropDownOpen, setDropDownOpen] = useState(false)
+    const dropdownRef = useRef(null)
+    const listRef = useRef(null)
+    useOutsideAlerter(dropdownRef, listRef, () => {setDropDownOpen(false)});
+
+
 
     let remap = (list) => list.map(({name, id}) => id);
 
@@ -35,7 +65,21 @@ export default function SettingSelection(props) {
                 <div className={"vert-align"}>
                     <div>
                         <span className={"setting-section-button left-button"} onClick={() => {props.searchCallback(makeParams())}}><FontAwesomeIcon icon={faMagnifyingGlass} /> Search</span>
-                        <span className={"setting-section-button right-button"} onClick={() => {props.randomCallback(makeParams())}}>Random</span>
+                      <div className="qnum-container">
+                        <span className={"setting-section-button right-button"} onClick={() => {setDropDownOpen(!dropDownOpen)}} ref={dropdownRef}>Random</span>
+                          {dropDownOpen ?
+                            <div className="qnum-dropdown" ref={listRef}>
+                              <ul>
+                                <li onClick={() => {setDropDownOpen(false); props.randomCallback(makeParams(), 5)}}>5 Questions</li>
+                                <li onClick={() => {setDropDownOpen(false); props.randomCallback(makeParams(), 10)}}>10 Questions</li>
+                                <li onClick={() => {setDropDownOpen(false); props.randomCallback(makeParams(), 25)}}>25 Questions</li>
+                                <li onClick={() => {setDropDownOpen(false); props.randomCallback(makeParams(), 100)}}>100 Questions</li>
+                                <li onClick={() => {setDropDownOpen(false); props.randomCallback(makeParams(), 500)}}>500 Questions</li>
+                              </ul>
+                            </div>
+                          :
+                          <></>}
+                      </div>
                     </div>
                 </div>
             </div>

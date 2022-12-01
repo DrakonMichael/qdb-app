@@ -25,8 +25,8 @@ function App() {
         fixParams({...p, num: 50, rand: false})
     }
 
-    let rndCallback = (p) => {
-        fixParams({...p, num: 10, rand: true})
+    let rndCallback = (p, count) => {
+        fixParams({...p, num: count, rand: true})
 
     }
 

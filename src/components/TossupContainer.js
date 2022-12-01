@@ -16,72 +16,153 @@ export default function TossupContainer(props) {
         return text.replaceAll(regex, "<span class='text-highlight'>" + highlight + "</span>")
     }
 
-    return (<>
-        <div className={"tossup-box"}>
-            <div className={"question-data-box"} onClick={() => setShowData(!showData)}>
-                <div className={"question-data-row"}>
-                    <span className={"question-text-bold vert-align"}>{props.num+1}.</span>
-                    <span className={"dropdown-arrow vert-align"}>
-                        {showData ? <FontAwesomeIcon icon={faCaretDown} /> : <FontAwesomeIcon icon={faCaretRight} /> }
+    if(props.type === 0) {
+        // Render a Tossup
+        return (<>
+            <div className={"tossup-box"}>
+                <div className={"question-data-box"} onClick={() => setShowData(!showData)}>
+                    <div className={"question-data-row"}>
+                        <span className={"question-text-bold vert-align"}>{props.num + 1}.</span>
+                        <span className={"dropdown-arrow vert-align"}>
+                        {showData ? <FontAwesomeIcon icon={faCaretDown}/> : <FontAwesomeIcon icon={faCaretRight}/>}
                     </span>
-                    <span className={"vert-align em090"}><TournamentIDToName id={props.tossup.tournament_id.toString()}/> | <CategoryIDToName id={props.tossup.category_id.toString()}/> | <SubcategoryIDToName id={props.tossup.subcategory_id.toString()}/></span>
+                        <span className={"vert-align em090"}><TournamentIDToName
+                            id={props.tossup.tournament_id.toString()}/> | <CategoryIDToName
+                            id={props.tossup.category_id.toString()}/> | <SubcategoryIDToName
+                            id={props.tossup.subcategory_id.toString()}/></span>
+                    </div>
+
+                    <div className={"dropdown-info-boxes " + (showData ? "" : "invisible")}>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>ID</div>
+                            <div className={"tu-info-data"}>{props.tossup.id}</div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>Tournament</div>
+                            <div className={"tu-info-data"}>{props.tossup.tournament_id} : <TournamentIDToName
+                                id={props.tossup.tournament_id.toString()}/></div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>Round</div>
+                            <div className={"tu-info-data"}>{props.tossup.round}</div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>#</div>
+                            <div className={"tu-info-data"}>{props.tossup.number}</div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>Category</div>
+                            <div className={"tu-info-data"}>{props.tossup.category_id} : <CategoryIDToName
+                                id={props.tossup.category_id.toString()}/></div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>Subcategory</div>
+                            <div className={"tu-info-data"}>{props.tossup.subcategory_id} : <SubcategoryIDToName
+                                id={props.tossup.subcategory_id.toString()}/></div>
+                        </div>
+                    </div>
+                </div>
+                <div className={"question-padder"}>
+                    <span className={"question-text-bold"}>Question:</span>
+                    <span
+                        dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.formatted_text, props.searchTerm)}}/>
+                </div>
+                <div className={"question-answer-box question-padder"}>
+                    <span className={"question-text-bold"}>Answer:</span>
+                    <span
+                        dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.formatted_answer, props.searchTerm)}}/>
+                </div>
+            </div>
+        </>)
+    } else {
+        // Render a bonus
+        return (<>
+            <div className={"tossup-box"}>
+                <div className={"question-data-box"} onClick={() => setShowData(!showData)}>
+                    <div className={"question-data-row"}>
+                        <span className={"question-text-bold vert-align"}>{props.num + 1}.</span>
+                        <span className={"dropdown-arrow vert-align"}>
+                        {showData ? <FontAwesomeIcon icon={faCaretDown}/> : <FontAwesomeIcon icon={faCaretRight}/>}
+                    </span>
+                        <span className={"vert-align em090"}><TournamentIDToName
+                            id={props.tossup.tournament_id.toString()}/> | <CategoryIDToName
+                            id={props.tossup.category_id.toString()}/> | <SubcategoryIDToName
+                            id={props.tossup.subcategory_id.toString()}/></span>
+                    </div>
+
+                    <div className={"dropdown-info-boxes " + (showData ? "" : "invisible")}>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>ID</div>
+                            <div className={"tu-info-data"}>{props.tossup.id}</div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>Tournament</div>
+                            <div className={"tu-info-data"}>{props.tossup.tournament_id} : <TournamentIDToName
+                                id={props.tossup.tournament_id.toString()}/></div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>Round</div>
+                            <div className={"tu-info-data"}>{props.tossup.round}</div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>#</div>
+                            <div className={"tu-info-data"}>{props.tossup.number}</div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>Category</div>
+                            <div className={"tu-info-data"}>{props.tossup.category_id} : <CategoryIDToName
+                                id={props.tossup.category_id.toString()}/></div>
+                        </div>
+                        <div className={"dropdown-info-box"}>
+                            <div className={"tu-info-header"}>Subcategory</div>
+                            <div className={"tu-info-data"}>{props.tossup.subcategory_id} : <SubcategoryIDToName
+                                id={props.tossup.subcategory_id.toString()}/></div>
+                        </div>
+                    </div>
+                </div>
+                <div className={"question-padder"}>
+                    <span className={"question-text-bold"}>Leadin:</span>
+                    <span
+                        dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.formatted_leadin, props.searchTerm)}}/>
                 </div>
 
-                <div className={"dropdown-info-boxes " + (showData ? "" : "invisible")}>
-                    <div className={"dropdown-info-box"}>
-                        <div className={"tu-info-header"}>ID</div>
-                        <div className={"tu-info-data"}>{props.tossup.id}</div>
-                    </div>
-                    <div className={"dropdown-info-box"}>
-                        <div className={"tu-info-header"}>Tournament</div>
-                        <div className={"tu-info-data"}>{props.tossup.tournament_id} : <TournamentIDToName id={props.tossup.tournament_id.toString()}/></div>
-                    </div>
-                    <div className={"dropdown-info-box"}>
-                        <div className={"tu-info-header"}>Round</div>
-                        <div className={"tu-info-data"}>{props.tossup.round}</div>
-                    </div>
-                    <div className={"dropdown-info-box"}>
-                        <div className={"tu-info-header"}>#</div>
-                        <div className={"tu-info-data"}>{props.tossup.number}</div>
-                    </div>
-                    <div className={"dropdown-info-box"}>
-                        <div className={"tu-info-header"}>Category</div>
-                        <div className={"tu-info-data"}>{props.tossup.category_id} : <CategoryIDToName id={props.tossup.category_id.toString()}/></div>
-                    </div>
-                    <div className={"dropdown-info-box"}>
-                        <div className={"tu-info-header"}>Subcategory</div>
-                        <div className={"tu-info-data"}>{props.tossup.subcategory_id} : <SubcategoryIDToName id={props.tossup.subcategory_id.toString()}/></div>
-                    </div>
+                <div className={"question-answer-box question-padder"}>
+                    <span className={"question-text-bold"}>1:</span>
+                    <span
+                        dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.part1_text, props.searchTerm)}}/>
+                </div>
+
+                <div className={"question-padder"}>
+                    <span className={"question-text-bold"}>Answer:</span>
+                    <span
+                        dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.part1_answer, props.searchTerm)}}/>
+                </div>
+
+                <div className={"question-answer-box question-padder"}>
+                    <span className={"question-text-bold"}>2:</span>
+                    <span
+                        dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.part2_text, props.searchTerm)}}/>
+                </div>
+
+                <div className={"question-padder"}>
+                    <span className={"question-text-bold"}>Answer:</span>
+                    <span
+                        dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.part2_answer, props.searchTerm)}}/>
+                </div>
+
+                <div className={"question-answer-box question-padder"}>
+                    <span className={"question-text-bold"}>3:</span>
+                    <span
+                        dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.part3_text, props.searchTerm)}}/>
+                </div>
+
+                <div className={"question-padder"}>
+                    <span className={"question-text-bold"}>Answer:</span>
+                    <span
+                        dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.part3_answer, props.searchTerm)}}/>
                 </div>
             </div>
-            <div className={"question-padder"}>
-                <span className={"question-text-bold"}>Question:</span>
-                <span dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.formatted_text, props.searchTerm)}} />
-                {/*
-                <Highlighter
-                    searchWords={[props.searchTerm]}
-                    autoEscape={true}
-                    textToHighlight={props.tossup.text}
-                />*/}
-            </div>
-            <div className={"question-answer-box question-padder"}>
-                <span className={"question-text-bold"}>Answer:</span>
-
-                <span dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.formatted_answer, props.searchTerm)}} />
-
-                {/*
-                <Highlighter
-                    searchWords={[props.searchTerm]}
-                    autoEscape={true}
-                    textToHighlight={props.tossup.answer}
-                />*/}
-
-            </div>
-
-        </div>
-
-
-
-    </>)
+        </>)
+    }
 
 }
