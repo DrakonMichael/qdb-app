@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import FooterBar from "./components/FooterBar";
 import SettingSelection from "./components/SettingSelection";
 import {useEffect, useState} from "react";
+import {Helmet} from "react-helmet";
 
 const categoryMapping = require("./mappings/categoryMapping.json")
 const subcategoryMapping = require("./mappings/subcategoryMapping.json")
@@ -67,6 +68,12 @@ function App() {
 
   return (
     <div className="App">
+
+      <Helmet>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <title>QDB</title>
+      </Helmet>
+
       <div className={"col-display"}>
         <NavBar />
           <div className={"tuListContainer"}>
