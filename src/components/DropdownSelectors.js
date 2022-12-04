@@ -21,6 +21,19 @@ const msStyle = {
 
 const closeIcon = <span className={"select-x"}><FontAwesomeIcon icon={faXmark}/></span>
 
+export function DropdownWrapper(props) {
+  return (
+    <div className={"info-box-wrapper"}>
+      <div className={"tu-info-box setting-dropdown-box"}>
+        <div className={"tu-info-header"}>{props.text}</div>
+        <div className={"tu-info-data"}>
+          {props.children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function CategorySelector(props) {
     const [categories, setCategories] = useState([])
 
@@ -33,6 +46,7 @@ export function CategorySelector(props) {
 
 
     return (
+      <DropdownWrapper text={"Category"}>
         <Multiselect
             options={categories} // Options to display in the dropdown
             displayValue="name" // Property name to display in the dropdown options
@@ -41,6 +55,7 @@ export function CategorySelector(props) {
             onRemove={(selectedList, selectedItem) => {props.callback([...selectedList])}}
             customCloseIcon={closeIcon}
         />
+      </DropdownWrapper>
     )
 }
 
@@ -56,6 +71,7 @@ export function SearchTypeSelector(props) {
 
 
     return (
+        <DropdownWrapper text={"Search Type"}>
         <Multiselect
             options={options} // Options to display in the dropdown
             displayValue="name" // Property name to display in the dropdown options
@@ -65,6 +81,7 @@ export function SearchTypeSelector(props) {
             customCloseIcon={closeIcon}
             singleSelect
         />
+        </DropdownWrapper>
     )
 }
 
@@ -81,14 +98,16 @@ export function DifficultySelector(props) {
 
 
     return (
-        <Multiselect
-            options={options} // Options to display in the dropdown
-            displayValue="name" // Property name to display in the dropdown options
-            style={msStyle}
-            onSelect={(selectedList, selectedItem) => {props.callback([...selectedList])}}
-            onRemove={(selectedList, selectedItem) => {props.callback([...selectedList])}}
-            customCloseIcon={closeIcon}
-        />
+        <DropdownWrapper text={"Difficulty"}>
+          <Multiselect
+              options={options} // Options to display in the dropdown
+              displayValue="name" // Property name to display in the dropdown options
+              style={msStyle}
+              onSelect={(selectedList, selectedItem) => {props.callback([...selectedList])}}
+              onRemove={(selectedList, selectedItem) => {props.callback([...selectedList])}}
+              customCloseIcon={closeIcon}
+          />
+        </DropdownWrapper>
     )
 }
 
@@ -119,6 +138,7 @@ export function SubcategorySelector(props) {
 
 
     return (
+        <DropdownWrapper text={"Subcategory"}>
         <Multiselect
             options={categories} // Options to display in the dropdown
             groupBy={"categoryString"}
@@ -128,6 +148,7 @@ export function SubcategorySelector(props) {
             onRemove={(selectedList, selectedItem) => {props.callback([...selectedList])}}
             customCloseIcon={closeIcon}
         />
+        </DropdownWrapper>
     )
 }
 
@@ -144,15 +165,17 @@ export function QuestionTypeSelector(props) {
 
 
     return (
-        <Multiselect
-            options={options} // Options to display in the dropdown
-            displayValue="name" // Property name to display in the dropdown options
-            style={msStyle}
-            onSelect={(selectedList, selectedItem) => {props.callback([...selectedList])}}
-            onRemove={(selectedList, selectedItem) => {props.callback([...selectedList])}}
-            customCloseIcon={closeIcon}
-            singleSelect
-        />
+        <DropdownWrapper text={"Question Type"}>
+          <Multiselect
+              options={options} // Options to display in the dropdown
+              displayValue="name" // Property name to display in the dropdown options
+              style={msStyle}
+              onSelect={(selectedList, selectedItem) => {props.callback([...selectedList])}}
+              onRemove={(selectedList, selectedItem) => {props.callback([...selectedList])}}
+              customCloseIcon={closeIcon}
+              singleSelect
+          />
+        </DropdownWrapper>
     )
 }
 
@@ -176,14 +199,16 @@ export function TournamentSelector(props) {
 
 
     return (
-        <Multiselect
-            options={options} // Options to display in the dropdown
-            groupBy={"year"}
-            displayValue="name" // Property name to display in the dropdown options
-            style={msStyle}
-            onSelect={(selectedList, selectedItem) => {props.callback([...selectedList])}}
-            onRemove={(selectedList, selectedItem) => {props.callback([...selectedList])}}
-            customCloseIcon={closeIcon}
-        />
+        <DropdownWrapper text={"Tournament"}>
+          <Multiselect
+              options={options} // Options to display in the dropdown
+              groupBy={"year"}
+              displayValue="name" // Property name to display in the dropdown options
+              style={msStyle}
+              onSelect={(selectedList, selectedItem) => {props.callback([...selectedList])}}
+              onRemove={(selectedList, selectedItem) => {props.callback([...selectedList])}}
+              customCloseIcon={closeIcon}
+          />
+        </DropdownWrapper>
     )
 }

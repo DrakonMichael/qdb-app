@@ -59,7 +59,7 @@ export default function SettingSelection(props) {
 
     return (
         <div className={"setting-section-wrapper"}>
-            <div className={"setting-section-row"}>
+            <div className={"setting-section-row search-row"}>
                 <input type={"text"} className={"setting-search-bar"} placeholder={"Search for questions here!"} value={searchText} onChange={event => setSearchText(event.target.value)} />
 
                 <div className={"vert-align"}>
@@ -83,56 +83,32 @@ export default function SettingSelection(props) {
                     </div>
                 </div>
             </div>
-            <div className={"setting-section-row dropdown-row dropdown-firstrow"}>
-                <div className={"info-box-wrapper"}>
-                    <div className={"tu-info-box setting-dropdown-box"}>
-                        <div className={"tu-info-header"}>Category</div>
-                        <div className={"tu-info-data"}>
-                            <CategorySelector callback={setCategories} />
-                        </div>
-                    </div>
-                </div>
-                <div className={"info-box-wrapper"}>
-                    <div className={"tu-info-box setting-dropdown-box"}>
-                        <div className={"tu-info-header"}>Search Type</div>
-                        <div className={"tu-info-data"}>
-                            <SearchTypeSelector callback={setSearchType}/>
-                        </div>
-                    </div>
-                </div>
-                <div className={"info-box-wrapper"}>
-                    <div className={"tu-info-box setting-dropdown-box"}>
-                        <div className={"tu-info-header"}>Difficulty</div>
-                        <div className={"tu-info-data"}><DifficultySelector callback={setDifficultyList} /></div>
-                    </div>
-                </div>
+            <div className={"setting-section-row dropdown-row dropdown-firstrow vis-gt-675"}>
+                <CategorySelector callback={setCategories} />
+                <SearchTypeSelector callback={setSearchType}/>
+                <DifficultySelector callback={setDifficultyList} />
             </div>
-            <div className={"setting-section-row dropdown-row"}>
-                <div className={"info-box-wrapper"}>
-                    <div className={"tu-info-box setting-dropdown-box"}>
-                        <div className={"tu-info-header"}>Subcategory</div>
-                        <div className={"tu-info-data"}>
-                            <SubcategorySelector callback={setSubcategoryList} categories={categories.map(({name, id}) => id)} />
-                        </div>
-                    </div>
-                </div>
-                <div className={"info-box-wrapper"}>
-                    <div className={"tu-info-box setting-dropdown-box"}>
-                        <div className={"tu-info-header"}>Question Type</div>
-                        <div className={"tu-info-data"}>
-                            <QuestionTypeSelector callback={setQuestionType} />
-                        </div>
-                    </div>
-                </div>
-                <div className={"info-box-wrapper"}>
-                    <div className={"tu-info-box setting-dropdown-box"}>
-                        <div className={"tu-info-header"}>Tournament</div>
-                        <div className={"tu-info-data"}>
-                            <TournamentSelector callback={setTournamentList} difficulties={difficultyList.map(({name, id}) => id)} />
-                        </div>
-                    </div>
-                </div>
+            <div className={"setting-section-row dropdown-row vis-gt-675"}>
+                <SubcategorySelector callback={setSubcategoryList} categories={categories.map(({name, id}) => id)} />
+                <QuestionTypeSelector callback={setQuestionType} />
+                <TournamentSelector callback={setTournamentList} difficulties={difficultyList.map(({name, id}) => id)} />
             </div>
+
+          <div className={"setting-section-row dropdown-row dropdown-firstrow vis-lt-675"}>
+            <CategorySelector callback={setCategories} />
+            <SearchTypeSelector callback={setSearchType}/>
+
+          </div>
+          <div className={"setting-section-row dropdown-row vis-lt-675"}>
+            <SubcategorySelector callback={setSubcategoryList} categories={categories.map(({name, id}) => id)} />
+            <QuestionTypeSelector callback={setQuestionType} />
+          </div>
+          <div className={"setting-section-row dropdown-row vis-lt-675"}>
+            <DifficultySelector callback={setDifficultyList} />
+            <TournamentSelector callback={setTournamentList} difficulties={difficultyList.map(({name, id}) => id)} />
+          </div>
+
+
         </div>
     )
 }
