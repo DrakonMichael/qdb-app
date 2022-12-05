@@ -245,7 +245,8 @@ html, body {
 .tu-info-header {
   font-family: LatoBold, serif;
   color: #555;
-  padding: 4px 8px 4px 8px;
+    padding: 4px 8px 4px 8px;
+
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: #eee;
@@ -511,9 +512,50 @@ html, body {
         font-size: 42px;
     }
 
+    .qnum-container ul {
+        width: 150px;
+    }
 
     .settings-wrap {
         height: 30px;
         width: 30px;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .tu-info-data {
+        padding: 2px;
+    }
+
+    .tu-info-header {
+        padding: 2px 4px 2px 4px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .dropdown-info-box {
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+
+    .tu-info-data {
+        padding: 0px;
+        font-size: 12px;
+    }
+
+    .tu-info-header {
+        padding: 0px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .dropdown-info-boxes {
+        overflow: hidden;
+    }
+
+    .dropdown-info-box {
+        margin-left: 2px;
+        margin-right: 2px;
     }
 }
