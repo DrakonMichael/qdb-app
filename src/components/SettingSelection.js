@@ -44,6 +44,7 @@ export default function SettingSelection(props) {
     const [dropDownOpen, setDropDownOpen] = useState(false)
     const dropdownRef = useRef(null)
     const listRef = useRef(null)
+    const searchRef = useRef(null)
     useOutsideAlerter(dropdownRef, listRef, () => {setDropDownOpen(false)});
 
 
@@ -60,7 +61,12 @@ export default function SettingSelection(props) {
     return (
         <div className={"setting-section-wrapper"}>
             <div className={"setting-section-row search-row"}>
-                <input type={"text"} className={"setting-search-bar"} placeholder={"Search for questions here!"} value={searchText} onChange={event => setSearchText(event.target.value)} />
+                <input type={"text"} className={"setting-search-bar"} ref={searchRef} placeholder={"Search for questions here!"} value={searchText} onChange={event => setSearchText(event.target.value)} onKeyDown={(event) => {
+                  if(event.key === "Enter") {
+                    props.searchCallback(makeParams());
+                    searchRef.current.blur();
+                  }
+                }} />
 
                 <div className={"vert-align"}>
                     <div>
