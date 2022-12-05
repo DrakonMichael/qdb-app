@@ -9,12 +9,14 @@ const categoryMapping = require("../mappings/categoryMapping.json")
 export default function TossupList(props) {
     const [tossups, setTossups] = useState([])
     const [haveTossups, setHaveTossups] = useState(true)
-    console.log("PARAMS", props.params)
+    const [debounce, setDebounce] = useState(false)
+
     useEffect(() => {
         if(props.params.noRender) return;
+        if(debounce) return;
         setTossups([])
         //http://localhost:8080/api/tossups?type=quizdb&diffis=[1,%202,%203]&subcats=[1,%202,%203,%204,%205]&limit=5&searchtype=0&searchterm=QDBNOSEARCH&tournaments=[]&random=1
-
+        setDebounce(true);
       const cfg = {
         headers:{
           'Access-Control-Allow-Origin': '*',
@@ -25,28 +27,32 @@ export default function TossupList(props) {
         if(props.params.questionType[0] === 0) {
             axios.get(`https://api.nocard.org:8080/api/tossups?type=quizdb&diffis=[${props.params.difficultyList.join(",")}]&subcats=[${props.params.subcategoryList.join(",")}]&limit=${props.params.num}&searchtype=${props.params.searchType[0]}&searchterm=${search}&tournaments=[${props.params.tournamentList.join(",")}]&random=${props.params.rand ? 1 : 0}`, cfg).then((res) => {
                 if(res.data.message === "success") {
-                    setTossups(res.data.data)
-                    setHaveTossups(true)
+                  setTossups(res.data.data)
+                  setHaveTossups(true)
+                  setDebounce(false);
                 } else {
-                    // NO TOSSUPS FOUND
-                    setHaveTossups(false)
+                  // NO TOSSUPS FOUND
+                  setHaveTossups(false)
+                  setDebounce(false);
                 }
 
             }).catch((err) => {
-              console.log("E", err)
+              setDebounce(false);
             })
         } else {
             axios.get(`https://api.nocard.org:8080/api/bonuses?type=quizdb&diffis=[${props.params.difficultyList.join(",")}]&subcats=[${props.params.subcategoryList.join(",")}]&limit=${props.params.num}&searchtype=${props.params.searchType[0]}&searchterm=${search}&tournaments=[${props.params.tournamentList.join(",")}]&random=${props.params.rand ? 1 : 0}`, cfg).then((res) => {
                 if(res.data.message === "success") {
-                    setTossups(res.data.data)
-                    setHaveTossups(true)
+                  setTossups(res.data.data)
+                  setHaveTossups(true)
+                  setDebounce(false);
                 } else {
-                    // NO TOSSUPS FOUND
-                    setHaveTossups(false)
+                  // NO TOSSUPS FOUND
+                  setHaveTossups(false)
+                  setDebounce(false);
                 }
 
             }).catch((err) => {
-              console.log("E", err)
+              setDebounce(false);
             })
         }
 
