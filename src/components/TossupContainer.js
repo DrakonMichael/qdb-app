@@ -6,6 +6,7 @@ import {useState} from "react";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons/faCaretDown";
 import {faLink} from "@fortawesome/free-solid-svg-icons/faLink";
 import { useNavigate, Link } from 'react-router-dom';
+import LinkCopy from "./LinkCopy";
 
 export default function TossupContainer(props) {
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function TossupContainer(props) {
                                 id={props.tossup.subcategory_id.toString()}/></span>
                         </div>
 
-                        <Link to={"/t/" + props.tossup.id} className={"pointer"}><FontAwesomeIcon icon={faLink}/></Link>
+                        <LinkCopy txt={"https://nocard.org/t/" + props.tossup.id}/>
                     </div>
 
                     <div className={"dropdown-info-boxes " + (showData ? "" : "invisible")}>
@@ -86,7 +87,7 @@ export default function TossupContainer(props) {
         // Render a bonus
         return (<>
             <div className={"tossup-box"}>
-                <div className={"question-data-box"} onClick={() => setShowData(!showData)}>
+                <div className={"question-data-box"}>
                     <div className={"question-data-row"}>
                         <div className={"question-data-display"} onClick={() => setShowData(!showData)}>
                             <span className={"question-text-bold vert-align"}>{props.num + 1}.</span>
@@ -99,7 +100,7 @@ export default function TossupContainer(props) {
                                 id={props.tossup.subcategory_id.toString()}/></span>
                         </div>
 
-                        <Link to={"/b/" + props.tossup.id} className={"pointer"}><FontAwesomeIcon icon={faLink}/></Link>
+                        <LinkCopy txt={"https://nocard.org/b/" + props.tossup.id}/>
                     </div>
 
                     <div className={"dropdown-info-boxes " + (showData ? "" : "invisible")}>

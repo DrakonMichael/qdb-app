@@ -276,6 +276,56 @@ html, body {
     cursor: pointer;
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 80px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -40px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    opacity: 0;
+    transition: opacity 0.5s;
+
+}
+
+
+.tooltipvisible {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.tooltipfadeout {
+    visibility: visible !important;
+    opacity: 0 !important;
+}
+
+
+
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+
 .question-data-display:hover .dropdown-arrow {
   color: #5599ff;
 }
@@ -525,6 +575,10 @@ html, body {
     display: none;
 }
 
+.copy-mobileonly {
+    display: none;
+}
+
 @media screen and (max-width: 1100px) {
     .search-row {
         display: flex;
@@ -551,6 +605,22 @@ html, body {
     .setting-section-row {
         margin-right: 10px;
         margin-left: 10px;
+    }
+
+    .tooltip .tooltiptext {
+        bottom: 0%;
+        left: -300%;
+    }
+
+    .tooltip .tooltiptext::after {
+        content: " ";
+        position: absolute;
+        top: 40%; /* At the bottom of the tooltip */
+        left: 100%;
+        margin-left: 0px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent black;
     }
 }
 
@@ -596,6 +666,39 @@ html, body {
         height: 30px;
         width: 30px;
     }
+
+    .tooltip .tooltiptext::after {
+        display: none;
+    }
+
+    .tooltip .tooltiptext {
+        position: fixed;
+        top: 5%;
+        bottom: 90%;
+        left: 25%;
+        width: 60%;
+
+
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        z-index: 999;
+    }
+
+    .tooltipvisible {
+        visibility: visible !important;
+        opacity: 0.85 !important;
+    }
+
+    .tooltipfadeout {
+        visibility: visible !important;
+        opacity: 0 !important;
+    }
+
+    .copy-mobileonly {
+        display: inline;
+    }
+
 }
 
 @media screen and (max-width: 530px) {
