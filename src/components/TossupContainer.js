@@ -4,9 +4,11 @@ import { faCaretRight } from "@fortawesome/free-solid-svg-icons/faCaretRight";
 import {CategoryIDToName, SubcategoryIDToName, TournamentIDToName} from "./Translators";
 import {useState} from "react";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons/faCaretDown";
+import {faLink} from "@fortawesome/free-solid-svg-icons/faLink";
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function TossupContainer(props) {
-
+    const navigate = useNavigate();
     const [showData, setShowData] = useState(false)
 
     const replaceTextWithHighlight = (text, highlight) => {
@@ -20,16 +22,20 @@ export default function TossupContainer(props) {
         // Render a Tossup
         return (<>
             <div className={"tossup-box"}>
-                <div className={"question-data-box"} onClick={() => setShowData(!showData)}>
+                <div className={"question-data-box"} >
                     <div className={"question-data-row"}>
-                        <span className={"question-text-bold vert-align"}>{props.num + 1}.</span>
-                        <span className={"dropdown-arrow vert-align"}>
-                        {showData ? <FontAwesomeIcon icon={faCaretDown}/> : <FontAwesomeIcon icon={faCaretRight}/>}
-                    </span>
-                        <span className={"vert-align em090"}><TournamentIDToName
-                            id={props.tossup.tournament_id.toString()}/> | <CategoryIDToName
-                            id={props.tossup.category_id.toString()}/> | <SubcategoryIDToName
-                            id={props.tossup.subcategory_id.toString()}/></span>
+                        <div className={"question-data-display"} onClick={() => setShowData(!showData)}>
+                            <span className={"question-text-bold vert-align"}>{props.num + 1}.</span>
+                            <span className={"dropdown-arrow vert-align"}>
+                            {showData ? <FontAwesomeIcon icon={faCaretDown}/> : <FontAwesomeIcon icon={faCaretRight}/>}
+                            </span>
+                            <span className={"vert-align em090"}><TournamentIDToName
+                                id={props.tossup.tournament_id.toString()}/> | <CategoryIDToName
+                                id={props.tossup.category_id.toString()}/> | <SubcategoryIDToName
+                                id={props.tossup.subcategory_id.toString()}/></span>
+                        </div>
+
+                        <Link to={"/t/" + props.tossup.id} className={"pointer"}><FontAwesomeIcon icon={faLink}/></Link>
                     </div>
 
                     <div className={"dropdown-info-boxes " + (showData ? "" : "invisible")}>
@@ -72,6 +78,8 @@ export default function TossupContainer(props) {
                     <span
                         dangerouslySetInnerHTML={{__html: replaceTextWithHighlight(props.tossup.formatted_answer, props.searchTerm)}}/>
                 </div>
+
+
             </div>
         </>)
     } else {
@@ -80,14 +88,18 @@ export default function TossupContainer(props) {
             <div className={"tossup-box"}>
                 <div className={"question-data-box"} onClick={() => setShowData(!showData)}>
                     <div className={"question-data-row"}>
-                        <span className={"question-text-bold vert-align"}>{props.num + 1}.</span>
-                        <span className={"dropdown-arrow vert-align"}>
-                        {showData ? <FontAwesomeIcon icon={faCaretDown}/> : <FontAwesomeIcon icon={faCaretRight}/>}
-                    </span>
-                        <span className={"vert-align em090"}><TournamentIDToName
-                            id={props.tossup.tournament_id.toString()}/> | <CategoryIDToName
-                            id={props.tossup.category_id.toString()}/> | <SubcategoryIDToName
-                            id={props.tossup.subcategory_id.toString()}/></span>
+                        <div className={"question-data-display"} onClick={() => setShowData(!showData)}>
+                            <span className={"question-text-bold vert-align"}>{props.num + 1}.</span>
+                            <span className={"dropdown-arrow vert-align"}>
+                            {showData ? <FontAwesomeIcon icon={faCaretDown}/> : <FontAwesomeIcon icon={faCaretRight}/>}
+                            </span>
+                            <span className={"vert-align em090"}><TournamentIDToName
+                                id={props.tossup.tournament_id.toString()}/> | <CategoryIDToName
+                                id={props.tossup.category_id.toString()}/> | <SubcategoryIDToName
+                                id={props.tossup.subcategory_id.toString()}/></span>
+                        </div>
+
+                        <Link to={"/b/" + props.tossup.id} className={"pointer"}><FontAwesomeIcon icon={faLink}/></Link>
                     </div>
 
                     <div className={"dropdown-info-boxes " + (showData ? "" : "invisible")}>

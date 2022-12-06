@@ -258,16 +258,25 @@ html, body {
   padding: 10px;
   font-size: 0.8em;
   border-bottom: 1px solid #ddd;
-  cursor: pointer;
+
 }
 
 .question-data-row {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: left;
+  justify-content: space-between;
 }
 
-.question-data-box:hover .dropdown-arrow {
+.question-data-display {
+    display: inherit;
+    cursor: pointer;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.question-data-display:hover .dropdown-arrow {
   color: #5599ff;
 }
 
@@ -290,9 +299,8 @@ html, body {
 .nav-logo-text {
   font-size: 80px;
   font-weight: bold;
+    cursor: pointer;
 }
-
-
 
 .nav-logo-subtitle {
   font-size: 24px;
@@ -372,8 +380,75 @@ html, body {
 }
 
 .footer-link {
-  text-decoration: underline;
-  color: #6666cc
+    text-decoration: underline;
+    color: #6666cc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color:#339;
+}
+
+.vert-list {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+}
+
+.donate-box {
+    padding: 20px 50px 20px 50px;
+}
+
+.donate-box-ttext {
+    font-size: 2em;
+    font-weight: bold;
+
+}
+
+.vert-space {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    background-color: #efefef;
+    flex-grow: 2;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    color: #777;
+}
+
+.contact-me-box {
+    height: 100%;
+    width: 80%;
+    padding:50px
+}
+
+.contact-list {
+    text-align: left;
+}
+
+.contact-emphasis {
+    font-weight: bold;
+    color: #3333ff;
+}
+
+.contact-exp {
+    color: #444;
+    font-size: 0.9em;
+    margin-left: 30px;
+}
+
+.contact-method {
+    margin-top: 10px;
+    background-color: #efefef;
+    padding: 5px;
+}
+
+.donate-box-mini {
+    font-size: 0.8em;
 }
 
 .lds-ring {

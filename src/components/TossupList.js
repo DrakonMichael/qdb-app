@@ -14,6 +14,8 @@ export default function TossupList(props) {
     useEffect(() => {
         if(props.params.noRender) return;
         if(debounce) return;
+
+
         setTossups([])
         //http://localhost:8080/api/tossups?type=quizdb&diffis=[1,%202,%203]&subcats=[1,%202,%203,%204,%205]&limit=5&searchtype=0&searchterm=QDBNOSEARCH&tournaments=[]&random=1
         setDebounce(true);
@@ -61,9 +63,9 @@ export default function TossupList(props) {
 
     }, [props.params])
 
-    let search = props.params.searchQuery.length > 0 ? props.params.searchQuery : "QDBNOSEARCH"
     let noTossups = <><div className={"ntu-text"}>No Tossups Found</div> <div className={"ntu-text ntu-sub"}>Try searching with different parameters</div> </>
-    let tuList = tossups.length <= 0 ? <div className={"ntu-text"}>Loading...<LoadingCircle /></div> : tossups.map((tu, ind) => <TossupContainer type={props.params.questionType[0]} tossup={tu} num={ind} searchTerm={props.params.searchQuery} />)
+    let tossup_generated = tossups.map((tu, ind) => <TossupContainer type={props.params.questionType[0]} tossup={tu} num={ind} searchTerm={props.params.searchQuery} />);
+    let tuList = tossups.length <= 0 ? <div className={"ntu-text"}>Loading...<LoadingCircle /></div> : tossup_generated
 
     return (
 
